@@ -8,7 +8,7 @@ Implemented Compressed Sensing based on Bayesian Statistics.
 
 ## MAP Estimate
 
-We find the maximum a posteriori (MAP) estimate of **x** given **Φ**, **y**, **Sigma**
+We find the maximum a posteriori (MAP) estimate of **x** given **Φ**, **y**, **Σ**
 
 First, we use Bayes' theorem  
 ![](others/map_arg.png)
@@ -22,13 +22,13 @@ Optimizing the inverse computation using Woodbury matrix Identity
 Final closed form of MAP estimate  
 ![](others/map_final.png)
 
-## Generating the Covariance Matrix (Sigma)
+## Generating the Covariance Matrix (Σ)
 
 Assumption: **i**<sup>th</sup> eigenvalue of the covariance matrix is of the form: **i**<sup>-**α**</sup> for all **i**s.
 
 1. Choose a random orthonormal matrix **U** of size **n**x**n**.
 2. Define a diagonal matrix **D** of size **n**x**n** with diagonal entries as **i**<sup>-**α**</sup>.
-3. Covariance Matrix, **Sigma** is defined as **UDU'**.
+3. Covariance Matrix, **Σ** is defined as **UDU'**.
 
 ## Experiment
 
