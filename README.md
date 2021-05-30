@@ -49,3 +49,11 @@ Code for Experiments is present in form of a function in `main.m`
 
 Execute `main.m` in MATLAB to reproduce the results. You can adjust the parameters like dimension of **x** (**n**), number of experiments (**nexp**) and set of **m** to test in `main.m`.  
 The code is tested on MATLAB 2020b, but should work on other versions of MATLAB with no or little changes.
+
+## Results
+
+### Individual plots
+<center><img src="plots/0.jpg" width="400" height="400"> <img src="plots/3.jpg" width="400" height="400"></center>
+
+### Relative plots
+<center><img src="plots/both.jpg" width="500" height="500"></center>
