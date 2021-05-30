@@ -8,6 +8,8 @@ rng(1);
 %% Constants
 % Dimension of signal
 n = 128;
+% Number of experiments
+nexp = 10;
 % Tolerance factor for creating Orthonormal Matrix
 tol = 0.1;
 % List of ms
@@ -41,13 +43,13 @@ for alpha=[0, 3]
     %% Generating Co-variance Matrix
     Sigma = U * diag((1:n).^(-alpha)) * U';
 
-    %% Generating 10 n-dimensional signals
-    xs = mvnrnd(zeros(n,1), Sigma, 10)';
+    %% Generating nexp n-dimensional signals
+    xs = mvnrnd(zeros(n,1), Sigma, nexp)';
 
     %% For every m
     for m=ms
         %% Initialize rmse list for fixed alpha and m
-        rmse = zeros(10, 1);
+        rmse = zeros(nexp, 1);
 
         %% Generating a random sensing matrix
         phi = randn(m, n) / sqrt(m);
@@ -57,7 +59,7 @@ for alpha=[0, 3]
         pSpT = phi * SpT;
 
         %% For every n-dimensional signal
-        for i=1:10
+        for i=1:nexp
             %% Generating noisy measurement
             y = phi * xs(:, i);
             sig = 0.01 * mean(abs(y));
