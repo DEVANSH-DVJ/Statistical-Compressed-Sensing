@@ -58,7 +58,9 @@ The code is tested on MATLAB 2020b, but should work on other versions of MATLAB 
 
 ### Relative plots
 
-<center><img src="plots/both.jpg" width="500" height="500"></center>
+<p align="center">
+  <img src="plots/both.jpg" width="500" height="500">
+</p>
 
 ## Conclusions
 
