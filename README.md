@@ -42,3 +42,10 @@ We use this to generate measure signal **y** (**phi** **x**).
 We add Gaussian noise with standard deviation as 0.01 times average of measured signal.
 
 We reconstruct **x** using the MAP estimate formula derived above and compute Relative Root Mean Square Error (Relative RMSE).
+
+## Code
+
+Code for Experiments is present in form of a function in `main.m`
+
+Execute `main.m` in MATLAB to reproduce the results. You can adjust the parameters like dimension of **x** (**n**), number of experiments (**nexp**) and set of **m** to test in `main.m`.  
+The code is tested on MATLAB 2020b, but should work on other versions of MATLAB with no or little changes.
