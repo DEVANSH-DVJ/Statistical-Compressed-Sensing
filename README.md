@@ -38,7 +38,7 @@ For each **α**, we generate **nexp** **n**-dimensional vectors (**x**s).
 We choose a set of **m**.  
 For every **m**, we generate a random sensing matrix **Φ** of size **m**x**n** with entries from iid Gaussian with mean 0 and variance 1/**m**.
 
-We use this to generate measure signal **y** (**Φ** **x**).  
+We use this to generate measure signal **y** (**Φx**).  
 We add Gaussian noise with σ as 0.01 times average of measured signal.
 
 We reconstruct **x** using the MAP estimate formula derived above and compute Relative Root Mean Square Error (Relative RMSE).
