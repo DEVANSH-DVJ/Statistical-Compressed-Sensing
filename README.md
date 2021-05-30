@@ -29,3 +29,16 @@ Assumption: **i**<sup>th</sup> eigenvalue of the covariance matrix is of the for
 1. Choose a random orthonormal matrix **U** of size **n**x**n**.
 2. Define a diagonal matrix **D** of size **n**x**n** with diagonal entries as **i**<sup>-alpha</sup>.
 3. Covariance Matrix, **Sigma** is defined as **UDU'**.
+
+## Experiment
+
+We experiment with two values of alpha: 0, 3.  
+For each alpha, we generate **nexp** **n**-dimensional vectors (**x**s).
+
+We choose a set of **m**.  
+For every **m**, we generate a random sensing matrix **phi** of size **m**x**n** with entries from iid Gaussian with mean 0 and variance 1/**m**.
+
+We use this to generate measure signal **y** (**phi** **x**).  
+We add Gaussian noise with standard deviation as 0.01 times average of measured signal.
+
+We reconstruct **x** using the MAP estimate formula derived above and compute Relative Root Mean Square Error (Relative RMSE).
