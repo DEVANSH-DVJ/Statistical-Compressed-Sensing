@@ -33,36 +33,40 @@ for i=2:n
     U(:,i) = vi ./ nrm;
 end
 
+%% For every alpha
 for alpha=[0, 3]
     %% Generating Co-variance Matrix
     Sigma = U * diag((1:n).^(-alpha)) * U';
 
-    %% Generating 10 n-dimensional vectors
+    %% Generating 10 n-dimensional signals
     xs = mvnrnd(zeros(n,1), Sigma, 10)';
 
-    %% Reconstruction
+    %% For every m
     for m=[40, 50, 64, 80, 100, 120]
+        %% Initialize rmse list for fixed alpha and m
         rmse = zeros(10, 1);
 
-        % Generating a random sensing matrix
+        %% Generating a random sensing matrix
         phi = randn(m, n) / sqrt(m);
 
         % Variables used in reconstruction (for faster computation)
         SpT = Sigma * phi';
         pSpT = phi * SpT;
 
+        %% For every n-dimensional signal
         for i=1:10
-            % Generating noisy measurement
+            %% Generating noisy measurement
             y = phi * xs(:, i);
             sig = 0.01 * mean(abs(y));
             y = y + mvnrnd(zeros(m, 1), eye(m)*sig^2, 1)';
 
-            % Reconstruction of x
+            %% Reconstruction of x
             x = (SpT - SpT/(eye(m)*sig^2 + pSpT)*pSpT) * y / (sig^2);
 
-            % Calculating Avg. Relative RMSE
+            %% Calculating Relative RMSE
             rmse(i) = sqrt(mean((x - xs(:,i)).^2))/sqrt(mean(xs(:,i).^2));
         end
+        %% Calculating Avg. Relative RMSE
         rmse_avg = [rmse_avg mean(rmse)];
     end
 end
