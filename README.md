@@ -57,3 +57,11 @@ The code is tested on MATLAB 2020b, but should work on other versions of MATLAB 
 
 ### Relative plots
 <center><img src="plots/both.jpg" width="500" height="500"></center>
+
+## Conclusions
+
+- Average Relative RMSE decreases with increase in m as expected. We have more information about the original signal, so reconstruction is better.
+- Average Relative RMSE for α = 3 lies in range 0.01-0.05. As the eigenvalues decay very fast (cubic speed), so elements are zero (or almost zero) with high probability. This means that the signal x is sparse (hence, compressible) , thus giving better reconstruction.
+- Average Relative RMSE for α = 0 lies in range 0.25-0.85. As the eigenvalues don’t decay, so elements aren't zero (or almost zero) with high probability. This means that the signal x is not sparse (hence, not compressible), thus giving poorer reconstruction.
+- Average Relative RMSE for any m is higher for smaller α (decay factor)
+- The decay of the eigenvalues of the covariance matrix is the equivalent of signal sparsity or compressibility in an appropriate orthonormal basis.
