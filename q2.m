@@ -14,27 +14,26 @@ tol = 0.1;
 %% Initialize Avg. Relative RMSE list
 rmse_avg = [];
 
-% For both alphas
-for alpha=[0, 3]
-    %% Generating a random orthonormal matrix
-    % The n-dimensional normal distribution has spherical symmetry,
-    % which implies that after normalization the drawn vectors would be
-    % uniformly distributed on the n-dimensional unit sphere.
-    % Then using Gram-schmidt on the random vector to generate matrix
-    U = zeros(n);
-    vi = randn(n,1);
-    U(:,1) = vi ./ norm(vi);
-    for i=2:n
-      nrm = 0;
-      % only if vector has sufficiently large component orthogonal to U
-      while nrm < tol
+%% Generating a random orthonormal matrix
+% The n-dimensional normal distribution has spherical symmetry,
+% which implies that after normalization the drawn vectors would be
+% uniformly distributed on the n-dimensional unit sphere.
+% Then using Gram-schmidt on the random vector to generate matrix
+U = zeros(n);
+vi = randn(n,1);
+U(:,1) = vi ./ norm(vi);
+for i=2:n
+    nrm = 0;
+    % only if vector has sufficiently large component orthogonal to U
+    while nrm < tol
         vi = randn(n,1);
         vi = vi - U(:,1:i-1) * (U(:,1:i-1)' * vi);
         nrm = norm(vi);
-      end
-      U(:,i) = vi ./ nrm;
     end
+    U(:,i) = vi ./ nrm;
+end
 
+for alpha=[0, 3]
     %% Generating Co-variance Matrix
     Sigma = U * diag((1:n).^(-alpha)) * U';
 
