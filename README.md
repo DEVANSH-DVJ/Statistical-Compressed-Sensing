@@ -24,16 +24,16 @@ Final closed form of MAP estimate
 
 ## Generating the Covariance Matrix (Sigma)
 
-Assumption: **i**<sup>th</sup> eigenvalue of the covariance matrix is of the form: **i**<sup>-alpha</sup> for all **i**s.
+Assumption: **i**<sup>th</sup> eigenvalue of the covariance matrix is of the form: **i**<sup>-**α**</sup> for all **i**s.
 
 1. Choose a random orthonormal matrix **U** of size **n**x**n**.
-2. Define a diagonal matrix **D** of size **n**x**n** with diagonal entries as **i**<sup>-alpha</sup>.
+2. Define a diagonal matrix **D** of size **n**x**n** with diagonal entries as **i**<sup>-**α**</sup>.
 3. Covariance Matrix, **Sigma** is defined as **UDU'**.
 
 ## Experiment
 
-We experiment with two values of alpha: 0, 3.  
-For each alpha, we generate **nexp** **n**-dimensional vectors (**x**s).
+We experiment with two values of **α**: 0, 3.  
+For each **α**, we generate **nexp** **n**-dimensional vectors (**x**s).
 
 We choose a set of **m**.  
 For every **m**, we generate a random sensing matrix **phi** of size **m**x**n** with entries from iid Gaussian with mean 0 and variance 1/**m**.
@@ -63,7 +63,7 @@ The code is tested on MATLAB 2020b, but should work on other versions of MATLAB 
 ## Conclusions
 
 - Average Relative RMSE decreases with increase in m as expected. We have more information about the original signal, so reconstruction is better.
-- Average Relative RMSE for α = 3 lies in range 0.01-0.05. As the eigenvalues decay very fast (cubic speed), so elements are zero (or almost zero) with high probability. This means that the signal x is sparse (hence, compressible) , thus giving better reconstruction.
-- Average Relative RMSE for α = 0 lies in range 0.25-0.85. As the eigenvalues don’t decay, so elements aren't zero (or almost zero) with high probability. This means that the signal x is not sparse (hence, not compressible), thus giving poorer reconstruction.
-- Average Relative RMSE for any m is higher for smaller α (decay factor)
+- Average Relative RMSE for **α** = 3 lies in range 0.01-0.05. As the eigenvalues decay very fast (cubic speed), so elements are zero (or almost zero) with high probability. This means that the signal x is sparse (hence, compressible) , thus giving better reconstruction.
+- Average Relative RMSE for **α** = 0 lies in range 0.25-0.85. As the eigenvalues don’t decay, so elements aren't zero (or almost zero) with high probability. This means that the signal x is not sparse (hence, not compressible), thus giving poorer reconstruction.
+- Average Relative RMSE for any m is higher for smaller **α** (decay factor)
 - The decay of the eigenvalues of the covariance matrix is the equivalent of signal sparsity or compressibility in an appropriate orthonormal basis.
