@@ -52,13 +52,9 @@ The code is tested on MATLAB 2020b, but should work on other versions of MATLAB 
 
 ## Results
 
-### Individual plots
-
 <p align="center">
   <img src="plots/0.jpg" width="400" height="400"> <img src="plots/3.jpg" width="400" height="400">
 </p>
-
-### Relative plots
 
 <p align="center">
   <img src="plots/both.jpg" width="500" height="500">
