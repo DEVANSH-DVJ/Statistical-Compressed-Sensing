@@ -10,9 +10,14 @@ rng(1);
 n = 128;
 % Tolerance factor for creating Orthonormal Matrix
 tol = 0.1;
+% List of alphas
+alphas = [0, 3]; % Don't change
+% List of ms
+ms = [40, 50, 64, 80, 100, 120];
 
 %% Initialize Avg. Relative RMSE list
-rmse_avg = [];
+rmse_avg = zeros(1, 2*length(ms));
+j = 0;
 
 %% Generating a random orthonormal matrix
 % The n-dimensional normal distribution has spherical symmetry,
@@ -34,7 +39,7 @@ for i=2:n
 end
 
 %% For every alpha
-for alpha=[0, 3]
+for alpha=alphas
     %% Generating Co-variance Matrix
     Sigma = U * diag((1:n).^(-alpha)) * U';
 
@@ -42,7 +47,7 @@ for alpha=[0, 3]
     xs = mvnrnd(zeros(n,1), Sigma, 10)';
 
     %% For every m
-    for m=[40, 50, 64, 80, 100, 120]
+    for m=ms
         %% Initialize rmse list for fixed alpha and m
         rmse = zeros(10, 1);
 
@@ -67,27 +72,28 @@ for alpha=[0, 3]
             rmse(i) = sqrt(mean((x - xs(:,i)).^2))/sqrt(mean(xs(:,i).^2));
         end
         %% Calculating Avg. Relative RMSE
-        rmse_avg = [rmse_avg mean(rmse)];
+        j = j + 1;
+        rmse_avg(j) = mean(rmse);
     end
 end
 
 %% Plot the Avg. Relative RMSE vs m
 figure;
 
-plot([40, 50, 64, 80, 100, 120], rmse_avg(1:6), 'r');
+plot(ms, rmse_avg(1 : length(ms)), 'r');
 legend("\alpha = 0");
 xlabel("m");
 ylabel("Avg. Relative RMSE");
 title("Avg. Relative RMSE Vs m");
 saveas(gcf, "plots/0.jpg");
-plot([40, 50, 64, 80, 100, 120], rmse_avg(7:12), 'b');
+plot(ms, rmse_avg(length(ms)+1 : 2*length(ms)), 'b');
 legend("\alpha = 3");
 xlabel("m");
 ylabel("Avg. Relative RMSE");
 title("Avg. Relative RMSE Vs m");
 saveas(gcf, "plots/3.jpg");
 hold on;
-plot([40, 50, 64, 80, 100, 120], rmse_avg(1:6), 'r');
+plot(ms, rmse_avg(1 : length(ms)), 'r');
 legend("\alpha = 3", "\alpha = 0");
 xlabel("m");
 ylabel("Avg. Relative RMSE");
@@ -97,5 +103,5 @@ saveas(gcf, "plots/both.jpg");
 close all;
 
 %% Print the Avg. Relative RMSE
-fprintf("Avg. Relative RMSE for \x03b1 = 0, m = %i \t: %f\n", [[40, 50, 64, 80, 100, 120]; rmse_avg(1:6)]);
-fprintf("Avg. Relative RMSE for \x03b1 = 3, m = %i \t: %f\n", [[40, 50, 64, 80, 100, 120]; rmse_avg(7:12)]);
+fprintf("Avg. Relative RMSE for \x03b1 = 0, m = %i \t: %f\n", [ms; rmse_avg(1 : length(ms))]);
+fprintf("Avg. Relative RMSE for \x03b1 = 3, m = %i \t: %f\n", [ms; rmse_avg(length(ms)+1 : 2*length(ms))]);
