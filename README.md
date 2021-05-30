@@ -8,7 +8,7 @@ Implemented Compressed Sensing based on Bayesian Statistics.
 
 ## MAP Estimate
 
-We find the maximum a posteriori (MAP) estimate of **x** given **phi**, **y**, **Sigma**
+We find the maximum a posteriori (MAP) estimate of **x** given **Φ**, **y**, **Sigma**
 
 First, we use Bayes' theorem  
 ![](others/map_arg.png)
@@ -36,9 +36,9 @@ We experiment with two values of **α**: 0, 3.
 For each **α**, we generate **nexp** **n**-dimensional vectors (**x**s).
 
 We choose a set of **m**.  
-For every **m**, we generate a random sensing matrix **phi** of size **m**x**n** with entries from iid Gaussian with mean 0 and variance 1/**m**.
+For every **m**, we generate a random sensing matrix **Φ** of size **m**x**n** with entries from iid Gaussian with mean 0 and variance 1/**m**.
 
-We use this to generate measure signal **y** (**phi** **x**).  
+We use this to generate measure signal **y** (**Φ** **x**).  
 We add Gaussian noise with standard deviation as 0.01 times average of measured signal.
 
 We reconstruct **x** using the MAP estimate formula derived above and compute Relative Root Mean Square Error (Relative RMSE).
