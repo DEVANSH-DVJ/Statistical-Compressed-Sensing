@@ -10,8 +10,6 @@ rng(1);
 n = 128;
 % Tolerance factor for creating Orthonormal Matrix
 tol = 0.1;
-% List of alphas
-alphas = [0, 3]; % Don't change
 % List of ms
 ms = [40, 50, 64, 80, 100, 120];
 
@@ -39,7 +37,7 @@ for i=2:n
 end
 
 %% For every alpha
-for alpha=alphas
+for alpha=[0, 3]
     %% Generating Co-variance Matrix
     Sigma = U * diag((1:n).^(-alpha)) * U';
 
