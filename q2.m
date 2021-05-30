@@ -2,14 +2,21 @@ clc;
 clear;
 close all;
 
+%% Set Seed
 rng(1);
 
+%% Constants
+% Dimension of signal
 n = 128;
+% Tolerance factor for creating Orthonormal Matrix
 tol = 0.1;
+
+%% Initialize Avg. Relative RMSE list
 rmse_avg = [];
 
+% For both alphas
 for alpha=[0, 3]
-    % Generating a random orthonormal matrix
+    %% Generating a random orthonormal matrix
     % The n-dimensional normal distribution has spherical symmetry,
     % which implies that after normalization the drawn vectors would be
     % uniformly distributed on the n-dimensional unit sphere.
@@ -28,12 +35,13 @@ for alpha=[0, 3]
       U(:,i) = vi ./ nrm;
     end
 
-    % Generating Co-variance Matrix
+    %% Generating Co-variance Matrix
     Sigma = U * diag((1:n).^(-alpha)) * U';
 
-    % Generating 10 n-dimensional vectors
+    %% Generating 10 n-dimensional vectors
     xs = mvnrnd(zeros(n,1), Sigma, 10)';
 
+    %% Reconstruction
     for m=[40, 50, 64, 80, 100, 120]
         rmse = zeros(10, 1);
 
@@ -60,7 +68,7 @@ for alpha=[0, 3]
     end
 end
 
-% Average RMSE vs m
+%% Plot the Avg. Relative RMSE vs m
 figure;
 
 plot([40, 50, 64, 80, 100, 120], rmse_avg(1:6), 'r');
@@ -85,5 +93,6 @@ saveas(gcf, "plots/both.jpg");
 
 close all;
 
+%% Print the Avg. Relative RMSE
 fprintf("Avg. Relative RMSE for \x03b1 = 0, m = %i \t: %f\n", [[40, 50, 64, 80, 100, 120]; rmse_avg(1:6)]);
 fprintf("Avg. Relative RMSE for \x03b1 = 3, m = %i \t: %f\n", [[40, 50, 64, 80, 100, 120]; rmse_avg(7:12)]);
